@@ -1,24 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import logo from './logo.svg';
-import './App.css';
+
+//import './App.css';
 
 function App() {
+
+  const token = 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaYnVWS2FVTENtb2FwTDJLSTBQNDUxMjZLWjF4Q2l0TGlhRmtrUXhqMU5BIn0.eyJleHAiOjE3MDc0ODY3NzksImlhdCI6MTcwNzQ4NjQ3OSwiYXV0aF90aW1lIjoxNzA3NDg2NDc4LCJqdGkiOiI5NmI4ZmFjOS1kMmY0LTQwMjEtOWQ4Mi01ZmZmYTQ1MjM0ZmIiLCJpc3MiOiJodHRwczovL3NzbzIuYmV0YS5tb2V4LmNvbS9hdXRoL3JlYWxtcy9TU08iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjo2ZDMwYmZiYy01NGE4LTRhMjEtYWRjZS1jYTYwNGQxOWYxZjE6OTM1NzQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhbGdvcGFjayIsInNlc3Npb25fc3RhdGUiOiI2ODEyMzExNC0xYWQ0LTQ2YjgtYjYyNS0wMDg2MjAxYzg4MDUiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vbG9jYWxob3N0OjMwMDAiLCJodHRwczovL2RhdGFzaG9wLm1vZXgucGNjLmlubm9jb25zdWx0aW5nLnJ1IiwiaHR0cHM6Ly90ZXN0MDEuZGF0YXNob3AubW9leC5wY2MuaW5ub2NvbnN1bHRpbmcucnUiLCJodHRwOi8vbG9jYWxob3N0OjMwMDAiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI2ODEyMzExNC0xYWQ0LTQ2YjgtYjYyNS0wMDg2MjAxYzg4MDUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiOTM1NzQiLCJlbWFpbCI6ImFua3V6bmV0c292QGVnYXJ0ZWNoLnJ1In0.KDVVikGgTE54yJcM89tMggOfrogoqAJ0ZlATDj0Vz8gc7lruJv63LYghqW_ymzpAsXQNKNGjLokQHvdIltDu8Z14BoC_d5wPrGvHtss5ZKSiLdVbY_6jQ0wOgkA_LPEITi7M7-yqq26_cWexx6ZUDxb9ER_y90e6XavMe7XT02Oc-TDx7_9lL0mBn7cEDU8hNKKxDqgkRxyRr89NFv4uscCIJox0eDOi-bbFrz_ZsqU1DKrPoqQnZRh880chGhDxX_ndVMhhgibEe30s6UZlxkaArmTqndrgSBWDGGsOJ02KmSAQVE3g3TrStHu8pygXxFUOvQhhcr4CPsX817z8eA'
+
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+  const [data, setData] = useState('');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() =>
+        axios.get('/api/userprofile/v1/')
+          .then((res) => {
+            console.log(res)
+            setData(JSON.stringify(res.data))
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }>GET1
+      </button>
+
+      <br/>
+      {data}
     </div>
   );
 }
