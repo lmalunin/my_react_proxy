@@ -1,14 +1,14 @@
 const {createProxyMiddleware} = require('http-proxy-middleware');
 
 module.exports = function (app) {
-  // app.use(
-  //     '/api1',
-  //     createProxyMiddleware({
-  //       target: 'http://193.164.149.115:8099/moex-datashop-profileservice/',
-  //       changeOrigin: true,
-  //     })
-  // );
-  //
+  app.use(
+      '/api1',
+      createProxyMiddleware({
+        target: 'http://193.164.149.115:8099/moex-datashop-profileservice/',
+        changeOrigin: true,
+      })
+  );
+
   app.use(
       '/api',
       createProxyMiddleware({
