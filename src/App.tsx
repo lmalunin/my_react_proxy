@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <button onClick={() =>
-        axios.get('/api/userprofile/v1/')
+        axios.get('/api2/api/userprofile/v1/')
           .then((res) => {
             console.log(res)
             setData(JSON.stringify(res.data))
